@@ -33,7 +33,7 @@ test('Verify if text is blinking', async({page}) => {
 
 //Handling Child windows & Tabs with Playwright by switching browser context 
 
-test.only('New tab handling', async ({browser}) => {
+test('New tab handling', async ({browser}) => {
     const context = await browser.newContext();
     const page = await context.newPage();
     await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
