@@ -30,3 +30,28 @@ test('Verify if text is blinking', async({page}) => {
     await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
     await expect(documentLink).toHaveAttribute("class", "blinkingText");
 });
+
+//Handling Child windows & Tabs with Playwright by switching browser context 
+
+test.only('New tab handling', async ({browser}) => {
+    const context = await browser.newContext();
+    const page = await context.newPage();
+    await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
+    const documentLink = page.locator("[href*='documents-request']");
+
+   const [newPage] = await Promise.all([
+        context.waitForEvent('page'),
+        documentLink.click(),
+    ]);
+    const text = await newPage.locator(".red").textContent();
+    console.log(text);
+    //Extracting value from the string
+    const arrayText = text.split("@");
+    const domain = arrayText[1].split(" ")[0];
+    console.log(domain);
+    //coming back to the previous page and entering value from the other Tab
+    await page.locator("#username").type(domain);
+    await page.pause();
+    console.log(await page.locator("#username").textContent());
+
+});
