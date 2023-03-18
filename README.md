@@ -3,3 +3,6 @@ Purpose of this repository is to keep code notes and exercises made during cours
 
 **Useful commands:** </br>
 `npx playwright test --debug` - running tests with playwright inspector
+
+
+https://trace.playwright.dev/ - trace tool where you can upload and review .zip files
